@@ -1,6 +1,7 @@
 package org.zerock.stock.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.zerock.stock.domain.Stock;
 import org.zerock.stock.repository.StockRepository;
@@ -13,7 +14,7 @@ public class StockService {
         this.stockRepository = stockRepository;
     }
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public synchronized void decrease(Long id, Long quantity){
         // Stock 조회
         // 재고를 감소시킨 뒤
